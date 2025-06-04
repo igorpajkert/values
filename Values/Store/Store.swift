@@ -10,10 +10,20 @@ import SwiftUI
 @Observable
 final class Store {
     
-    var entries = [Entry]()
-    var values: [Value] = load("data.json")
+    var entries: [Entry]
+    var values: [Value]
     
     var selectedEntry: Entry?
+    var entryToDelete: Entry?
+    var isShowingDeleteAlert = false
+    
+    init(
+        entries: [Entry] = []
+    ) {
+        self.entries = entries
+        self.values = load("data.json")
+        self.selectedEntry = nil
+    }
     
     private static func fileURL() throws -> URL {
         try FileManager.default.url(
@@ -48,11 +58,27 @@ final class Store {
     // MARK: - Intents
     func addEntry() {
         let entry = Entry(values: values, dateModified: .now)
-        entries.append(entry)
+        
+        withAnimation {
+            entries.append(entry)
+        }
     }
     
     func selectEntry(_ entry: Entry) {
         selectedEntry = entry
+    }
+    
+    func deleteEntry() {
+        guard let entryToDelete else { return }
+        
+        withAnimation {
+            entries.removeAll { $0.id == entryToDelete.id }
+        }
+    }
+    
+    func markToDelete(_ entry: Entry) {
+        entryToDelete = entry
+        isShowingDeleteAlert = true
     }
     
     func moveValues(from source: IndexSet, to destination: Int) {

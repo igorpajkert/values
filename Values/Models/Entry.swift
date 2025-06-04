@@ -18,8 +18,8 @@ final class Entry: Identifiable, Codable {
     init(
         id: UUID = UUID(),
         values: [Value],
-        dateCreated: Date = Date.now,
-        dateModified: Date
+        dateCreated: Date = .now,
+        dateModified: Date = .now
     ) {
         self.id = id
         self.values = values

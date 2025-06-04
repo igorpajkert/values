@@ -19,9 +19,10 @@ struct EntriesView: View {
                 ForEach(store.entries) { entry in
                     EntryCard(
                         dateCreated: entry.dateCreated,
-                        dateModified: entry.dateModified) {
-                            store.selectEntry(entry)
-                        }
+                        dateModified: entry.dateModified,
+                        primaryAction: { store.selectEntry(entry) },
+                        deleteAction: { store.markToDelete(entry) }
+                    )
                 }
             }
         }
@@ -32,6 +33,16 @@ struct EntriesView: View {
         .navigationDestination(item: $store.selectedEntry) { entry in
             EntryView()
         }
+        .alert(
+            "alert.deleteConfirmation.title",
+            isPresented: $store.isShowingDeleteAlert,
+            actions: {
+                Button("button.delete", role: .destructive) {
+                    store.deleteEntry()
+                }
+            }, message: {
+                Text("text.deleteConfirmation.message")
+            })
     }
     
     private var toolbarButtonAdd: some ToolbarContent {
@@ -46,5 +57,6 @@ struct EntriesView: View {
 #Preview {
     NavigationStack {
         EntriesView()
+            .environment(\.store, Store(entries: [.init(values: []), .init(values: [])]))
     }
 }
