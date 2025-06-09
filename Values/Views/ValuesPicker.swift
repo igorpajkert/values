@@ -31,13 +31,18 @@ struct ValuesPicker: View {
         }
         switch store.selectionPhase {
         case .ongoing:
-            Text("text.info.ongoingPhase")
-                .multilineTextAlignment(.center)
+            ongoingView
         case .finished:
             finishedView
         case .ended:
             endedView
         }
+    }
+    
+    private var ongoingView: some View {
+        Text("text.info.ongoingPhase")
+            .multilineTextAlignment(.center)
+            .padding()
     }
     
     private var finishedView: some View {
