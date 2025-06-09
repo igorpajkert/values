@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EntryView: View {
     
+    @State private var isShowingPicker = false
+    
     @Environment(\.store) private var store
     @Environment(\.editMode) private var editMode
     
@@ -28,6 +30,16 @@ struct EntryView: View {
         .listStyle(.plain)
         .toolbar {
             EditButton()
+        }
+        .sheet(isPresented: $isShowingPicker) {
+            ValuesPicker()
+        }
+        .onAppear {
+            if let isPicked = store.selectedEntry?.isPicked {
+                if !isPicked {
+                    isShowingPicker.toggle()
+                }
+            }
         }
     }
     

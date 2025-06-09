@@ -11,8 +11,24 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Usuń wpis"
+          }
+        }
+      }
+    },
+    "button.close" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamknij"
           }
         }
       }
@@ -33,6 +49,22 @@
         }
       }
     },
+    "button.next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dalej"
+          }
+        }
+      }
+    },
     "text.deleteConfirmation.message" : {
       "localizations" : {
         "en" : {
@@ -45,6 +77,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jesteś pewien, że chcesz usunąć ten wpis?"
+          }
+        }
+      }
+    },
+    "text.info.endedPhase" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have selected all values! You can reorganize them in the next step."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybrałeś wszystkie wartości! Możesz je przeorganizować w kolejnym kroku."
+          }
+        }
+      }
+    },
+    "text.info.finishedPhase" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select the 10 most important values in the next step."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz 10 najważniejszych wartości w kolejnym kroku."
+          }
+        }
+      }
+    },
+    "text.info.ongoingPhase" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select 10 values in order from most important to least important."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz 10 wartości w kolejności od najważniejszej do najmniej ważnej."
           }
         }
       }
@@ -77,6 +157,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wpisy"
+          }
+        }
+      }
+    },
+    "title.picker" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select values"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz wartości"
           }
         }
       }

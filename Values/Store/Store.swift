@@ -11,18 +11,23 @@ import SwiftUI
 final class Store {
     
     var entries: [Entry]
-    var values: [Value]
+    var values: [Value] = load("data.json")
     
     var selectedEntry: Entry?
     var entryToDelete: Entry?
     var isShowingDeleteAlert = false
     
+    var selectedValues = [Value]()
+    var remainingValues = [Value]()
+    var selectedValuesCount = 0
+    var selectionPhase = ValuesSelectionPhase.ongoing
+    
     init(
         entries: [Entry] = []
     ) {
         self.entries = entries
-        self.values = load("data.json")
-        self.selectedEntry = nil
+        
+        remainingValues = getRemainingValues()
     }
     
     private static func fileURL() throws -> URL {
@@ -84,6 +89,56 @@ final class Store {
     func moveValues(from source: IndexSet, to destination: Int) {
         selectedEntry?.move(from: source, to: destination)
     }
+    
+    func getIndex(of value: Value) -> Int {
+        selectedValues.firstIndex(of: value) ?? 0
+    }
+    
+    func selectValue(_ value: Value) {
+        guard selectedValuesCount < 10 else { return }
+        
+        if selectedValues.contains(value) {
+            selectedValues.removeAll { $0.id == value.id }
+            
+            selectedValuesCount -= 1
+            if selectedValuesCount < 10 {
+                withAnimation {
+                    selectionPhase = .ongoing
+                }
+            }
+        } else {
+            selectedValues.append(value)
+            
+            selectedValuesCount += 1
+            if selectedValuesCount == 10 {
+                withAnimation {
+                    selectionPhase = .finished
+                    
+                    if getRemainingValues().isEmpty {
+                        selectionPhase = .ended
+                        selectedEntry?.isPicked = true
+                        selectedEntry?.values = selectedValues
+                    }
+                }
+            }
+        }
+    }
+    
+    func isValueSelected(_ value: Value) -> Bool {
+        selectedValues.contains(value)
+    }
+    
+    func getRemainingValues() -> [Value] {
+        values.filter { !selectedValues.contains($0) }
+    }
+    
+    func nextPhase() {
+        withAnimation {
+            selectedValuesCount = 0
+            remainingValues = getRemainingValues()
+            selectionPhase = .ongoing
+        }
+    }
 }
 
 extension EnvironmentValues {
@@ -119,4 +174,10 @@ func load<T: Decodable>(_ filename: String) -> T {
     } catch {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
+}
+
+enum ValuesSelectionPhase {
+    case ongoing
+    case finished
+    case ended
 }

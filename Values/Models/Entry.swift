@@ -11,20 +11,27 @@ import Foundation
 final class Entry: Identifiable, Codable {
     
     let id: UUID
-    private(set) var values: [Value]
+    var values: [Value] {
+        didSet {
+            dateModified = .now
+        }
+    }
     let dateCreated: Date
-    private(set) var dateModified: Date
+    var dateModified: Date
+    var isPicked: Bool
     
     init(
         id: UUID = UUID(),
         values: [Value],
         dateCreated: Date = .now,
-        dateModified: Date = .now
+        dateModified: Date = .now,
+        isPicked: Bool = false
     ) {
         self.id = id
         self.values = values
         self.dateCreated = dateCreated
         self.dateModified = dateModified
+        self.isPicked = isPicked
     }
     
     func move(from source: IndexSet, to newIndex: Int) {
