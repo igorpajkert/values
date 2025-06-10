@@ -13,7 +13,11 @@ final class Store {
     var entries: [Entry]
     var values: [Value] = load("data.json")
     
-    var selectedEntry: Entry?
+    var selectedEntry: Entry? {
+        didSet {
+            resetPicker()
+        }
+    }
     var entryToDelete: Entry?
     var isShowingDeleteAlert = false
     
@@ -117,7 +121,7 @@ final class Store {
                     if getRemainingValues().isEmpty {
                         selectionPhase = .ended
                         selectedEntry?.isPicked = true
-                        selectedEntry?.values = selectedValues
+                        selectedEntry?.values = selectedValues.reversed()
                     }
                 }
             }
@@ -138,6 +142,13 @@ final class Store {
             remainingValues = getRemainingValues()
             selectionPhase = .ongoing
         }
+    }
+    
+    func resetPicker() {
+        selectedValuesCount = 0
+        selectedValues.removeAll()
+        remainingValues = getRemainingValues()
+        selectionPhase = .ongoing
     }
 }
 

@@ -102,13 +102,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the 10 most important values in the next step."
+            "value" : "Select the 10 least important values in the next step."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz 10 najważniejszych wartości w kolejnym kroku."
+            "value" : "Wybierz 10 najmniej ważnych wartości w kolejnym kroku."
           }
         }
       }
@@ -118,13 +118,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select 10 values in order from most important to least important."
+            "value" : "Select 10 values in order from least important to most important."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wybierz 10 wartości w kolejności od najważniejszej do najmniej ważnej."
+            "value" : "Wybierz 10 wartości w kolejności od najmniej ważnej do najważniejszej."
           }
         }
       }
