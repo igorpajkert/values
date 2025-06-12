@@ -40,33 +40,46 @@ struct ValuesPicker: View {
     }
     
     private var ongoingView: some View {
-        Text("text.info.ongoingPhase")
-            .multilineTextAlignment(.center)
-            .padding()
+        VStack {
+            progressBar
+            Text("text.info.ongoingPhase")
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+        .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
     }
     
     private var finishedView: some View {
         VStack {
+            progressBar
             Text("text.info.finishedPhase")
+                .padding()
             Button("button.next", action: store.nextPhase)
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .padding()
         }
-        .padding()
         .multilineTextAlignment(.center)
+        .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
     }
     
     private var endedView: some View {
         VStack {
+            progressBar
             Text("text.info.endedPhase")
+                .padding()
             Button("button.close") { dismiss() }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
-                .padding()
         }
-        .padding()
         .multilineTextAlignment(.center)
+        .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
+    }
+    
+    private var progressBar: some View {
+        ProgressView(
+            value: Float(store.selectedValues.count),
+            total: Float(store.values.count)
+        )
     }
 }
 
