@@ -31,7 +31,7 @@ struct EntryView: View {
         .toolbar {
             EditButton()
         }
-        .sheet(isPresented: $isShowingPicker) {
+        .fullScreenCover(isPresented: $isShowingPicker) {
             ValuesPicker()
         }
         .onAppear {
