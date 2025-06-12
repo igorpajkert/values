@@ -8,8 +8,14 @@
 import Foundation
 
 struct Value: Identifiable, Equatable, Hashable, Codable {
-        
-    let name: String
+    
+    let en: String
+    let pl: String
+    
+    var name: String {
+        let language = Locale.preferredLanguages.first
+        return language == "pl" ? pl : en
+    }
     
     var id: String { name }
 }
