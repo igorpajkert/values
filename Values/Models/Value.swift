@@ -13,7 +13,7 @@ struct Value: Identifiable, Equatable, Hashable, Codable {
     let pl: String
     
     var name: String {
-        let language = Locale.preferredLanguages.first
+        let language = Bundle.main.preferredLocalizations[0]
         return language == "pl" ? pl : en
     }
     
