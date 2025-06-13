@@ -15,14 +15,18 @@ struct EntriesView: View {
         @Bindable var store = store
         ZStack {
             BorderMeshGradient()
-            ScrollView {
-                ForEach(store.entries) { entry in
-                    EntryCard(
-                        dateCreated: entry.dateCreated,
-                        dateModified: entry.dateModified,
-                        primaryAction: { store.selectEntry(entry) },
-                        deleteAction: { store.markToDelete(entry) }
-                    )
+            if store.entries.isEmpty {
+                placeholderView
+            } else {
+                ScrollView {
+                    ForEach(store.entries) { entry in
+                        EntryCard(
+                            dateCreated: entry.dateCreated,
+                            dateModified: entry.dateModified,
+                            primaryAction: { store.selectEntry(entry) },
+                            deleteAction: { store.markToDelete(entry) }
+                        )
+                    }
                 }
             }
         }
@@ -52,11 +56,24 @@ struct EntriesView: View {
             }
         }
     }
+    
+    private var placeholderView: some View {
+        VStack {
+            Button(action: store.addEntry) {
+                Image(systemName: "plus")
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.circle)
+            .font(.title)
+            .padding()
+            Text("text.addEntry")
+        }
+    }
 }
 
 #Preview {
     NavigationStack {
         EntriesView()
-            .environment(\.store, Store(entries: [.init(values: []), .init(values: [])]))
+            .environment(\.store, Store(entries: []))
     }
 }

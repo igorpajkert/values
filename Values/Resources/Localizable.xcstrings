@@ -65,6 +65,22 @@
         }
       }
     },
+    "text.addEntry" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add an entry to get started."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj wpis aby rozpocząć."
+          }
+        }
+      }
+    },
     "text.deleteConfirmation.message" : {
       "localizations" : {
         "en" : {
