@@ -57,6 +57,7 @@ struct ValuesPicker: View {
             Button("button.next", action: store.nextPhase)
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
+                .padding()
         }
         .multilineTextAlignment(.center)
         .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
@@ -70,6 +71,7 @@ struct ValuesPicker: View {
             Button("button.close") { dismiss() }
                 .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
+                .padding()
         }
         .multilineTextAlignment(.center)
         .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
