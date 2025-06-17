@@ -27,6 +27,9 @@ struct ValuesPicker: View {
                 }
                 .padding()
                 .navigationTitle("title.picker")
+                .toolbar {
+                    toolbarButtonCancel
+                }
             }
         }
         switch store.selectionPhase {
@@ -68,10 +71,13 @@ struct ValuesPicker: View {
             progressBar
             Text("text.info.endedPhase")
                 .padding()
-            Button("button.close") { dismiss() }
-                .buttonStyle(.borderedProminent)
-                .buttonBorderShape(.capsule)
-                .padding()
+            Button("button.close") {
+                dismiss()
+                store.resetPicker()
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .padding()
         }
         .multilineTextAlignment(.center)
         .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
@@ -82,6 +88,14 @@ struct ValuesPicker: View {
             value: Float(store.selectedValues.count),
             total: Float(store.values.count)
         )
+    }
+    
+    private var toolbarButtonCancel: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button("button.cancel") {
+                dismiss()
+            }
+        }
     }
 }
 

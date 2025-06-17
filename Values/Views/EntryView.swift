@@ -14,9 +14,11 @@ struct EntryView: View {
     @Environment(\.store) private var store
     @Environment(\.editMode) private var editMode
     
+    private let values: [Value] = load("data.json")
+    
     var body: some View {
         List {
-            ForEach(store.selectedEntry?.values ?? []) { value in
+            ForEach(store.selectedEntry?.values ?? values) { value in
                 HStack {
                     Text(value.name)
                     Spacer()
@@ -27,7 +29,7 @@ struct EntryView: View {
             .onMove(perform: store.moveValues)
             .listRowBackground(Color.lavender)
         }
-        .listStyle(.plain)
+        .listRowSpacing(10)
         .toolbar {
             EditButton()
         }
@@ -41,6 +43,20 @@ struct EntryView: View {
                 }
             }
         }
+        .overlay(alignment: .bottom) {
+            buttonPicker
+        }
+    }
+    
+    private var buttonPicker: some View {
+        Button(action: { isShowingPicker.toggle() }) {
+            Label("button.picker", systemImage: "chevron.up")
+        }
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.capsule)
+        .font(.title3)
+        .shadow(radius: 6)
+        .padding()
     }
     
     private func getIndex(of value: Value) -> Int {
@@ -51,6 +67,6 @@ struct EntryView: View {
 #Preview {
     NavigationStack {
         EntryView()
-            .environment(\.store, Store())
+            .environment(\.store, Store(entries: [Entry(values: load("data.json"))]))
     }
 }

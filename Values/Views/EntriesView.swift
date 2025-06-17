@@ -54,6 +54,8 @@ struct EntriesView: View {
             Button(action: store.addEntry) {
                 Image(systemName: "plus")
             }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.circle)
         }
     }
     

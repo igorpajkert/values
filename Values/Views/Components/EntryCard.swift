@@ -58,6 +58,7 @@ struct EntryCard: View {
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.circle)
+        .shadow(radius: 4)
     }
     
     private var buttonDelete: some View {
